@@ -12,6 +12,8 @@
     --color-card-hover: oklch(96.2% 0.044 156.743); /*green 100*/
     --color-card-background: oklch(97.7% 0.013 236.62); /*sky 50*/
     --color-card-text: oklch(13% 0.028 261.692);
+
+    --color-strokecolor_line:oklch(76.9% 0.188 70.08);
     
     
 
@@ -34,6 +36,8 @@
         --color-card-hover: oklch(86.285% 0.08163 118.683); /*green 100*/
         --color-card-background: oklab(100% 0 -0.00011);
         --color-card-text: oklch(100% 0.00011 271.152);
+
+        --color-strokecolor_line:oklch(69.6% 0.17 162.48);
         
 
     }
@@ -108,3 +112,31 @@
 }
 
 
+@keyframes scaleAndBlur {
+    0%, 10%{
+        opacity: 0;
+    
+        filter: blur(0px);
+    }
+    20%,30%,40%,50%{
+        opacity: 1;
+        filter: blur(10px);
+    }
+    60%{
+        filter: blur(0px);
+        opacity: 1;
+    }
+    100%{
+        filter: blur(20px);
+        opacity: 0;
+        fill: transparent;
+    }
+}
+
+
+
+.attentionDot{
+    transform-origin: center;
+    animation: scaleAndBlur 1s infinite ease-in-out;
+    will-change: transform , opacity, filter;
+}

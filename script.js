@@ -5,6 +5,7 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 gsap.registerPlugin(ScrollTrigger)
 
+const beenAtcount = 7
 const main_pg_drawings = document.querySelectorAll(".project-drawing");
 const svg_item = document.querySelector("#svg_item_main")
 
@@ -125,10 +126,11 @@ const been_placeholder = document.getElementById("been_placeholder")
 
 if (been_placeholder){
   console.log("Beeninfo placeholder found")
+ 
 
   const beenDisplay = beenInfo.map(been =>
-    ` <div class= "w-screen">
-        <h1 class="font-bold font-pixelify_bold text-4xl pl-10">Been ${been.connecter}</h1>
+    ` <div class= "w-screen z-10">
+        <h1 class=" font-bold font-pixelify_bold text-4xl pl-10">Been ${been.connecter}</h1>
         <div class="grid grid-cols-2">
             <div class= " p-[10%]">
                   <h2 class="">${been.title}</h2>
@@ -151,8 +153,11 @@ if (been_placeholder){
 
   const been_svg_item = document.querySelector("#been_svg_item")
   const path = been_svg_item.querySelector("path")
-
+  
   if (path){
+      const content_height = (been_placeholder.scrollHeight) + 450
+      been_svg_item.style.height = content_height + "px"
+      console.log("Height set for svg")
       const pathLength = path.getTotalLength()
       console.log(pathLength)
       
@@ -176,9 +181,45 @@ if (been_placeholder){
 
         )
 
+        const restrictedLength = 1300
+        const availableLength = pathLength-restrictedLength
+        const segmentLegnth = availableLength/beenAtcount
+        let attempts = 0
+        let maxattempts = 500
+        let placedDots = 0
+
+        while (attempts <maxattempts && placedDots <beenAtcount){
+          attempts ++
+          const minRange = restrictedLength + (placedDots*segmentLegnth)
+
+          const randomWithinSegment = Math.random()* segmentLegnth
+          const randomPointPlace = minRange + randomWithinSegment
+          const Cardpoint = path.getPointAtLength(randomPointPlace)
+
+          const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle")
+          circle.setAttribute("cx", Cardpoint.x)
+          circle.setAttribute("cy", Cardpoint.y)
+          circle.setAttribute("r", 50)
+          circle.setAttribute("fill", "red")
+          circle.style.zIndex = "100"
+          circle.style.pointerEvents = "auto"
+          circle.style.cursor = "pointer"
+
+          circle.classList.add("attentionDot")
+          
+          been_svg_item.querySelector("svg").appendChild(circle)
+          placedDots ++
+        
+
+
+        }
+
+
   }else{
     console.log("couldnt calculate length")
   }
+
+   
 }
 
 
