@@ -163,24 +163,6 @@ if (been_placeholder){
       
       gsap.set(path, {strokeDasharray:pathLength})
 
-      gsap.fromTo(
-          path,{
-            strokeDashoffset: pathLength,
-          },
-          {
-            strokeDashoffset: 0,
-            duration:10,
-            ease:"none",
-            scrollTrigger:{
-              trigger:"#been_svg_item",
-              start: "top top",
-              end: "bottom bottom",
-              scrub:1,
-            }
-          }
-
-        )
-
         const restrictedLength = 1300
         const availableLength = pathLength-restrictedLength
         const segmentLegnth = availableLength/beenAtcount
@@ -202,9 +184,10 @@ if (been_placeholder){
           circle.setAttribute("r", 50)
           circle.setAttribute("fill", "red")
           circle.style.zIndex = "100"
+          circle.style.opacity = "0"
           circle.style.pointerEvents = "auto"
           circle.style.cursor = "pointer"
-
+          circle.dataset.distance = randomPointPlace
           circle.classList.add("attentionDot")
           
           been_svg_item.querySelector("svg").appendChild(circle)
@@ -213,6 +196,59 @@ if (been_placeholder){
 
 
         }
+
+
+
+        gsap.fromTo(
+          path,{
+            strokeDashoffset: pathLength,
+          },
+          {
+            strokeDashoffset: 0,
+            duration:10,
+            ease:"none",
+            scrollTrigger:{
+              trigger:"#been_svg_item",
+              start: "top top",
+              end: "bottom bottom",
+              scrub:1,
+              onUpdate: (self) => {
+
+                const currentlengthDrawn = pathLength * self.progress
+                console.log("current legnth draw" + currentlengthDrawn)
+                const dots = document.querySelectorAll(".attentionDot")
+              
+
+                dots.forEach((dot) =>{
+                  const dotDistance = parseFloat(dot.dataset.distance)
+                  const dotVisible = dot.getAttribute("data-visible") === "true"
+                  console.log("dotdistance= " + dotDistance)
+
+                  if (currentlengthDrawn >= dotDistance){
+                    if(!dotVisible){
+                      dot.setAttribute("data-visible","true")
+                      gsap.to(dot, {opacity:1, duration: 0.3,overwrite: "auto"})
+                      dot.style.animation = "scaleAndBlur 2s infinite ease-in-out";
+                      
+                    }
+                    
+                  }else{
+                    if (dotVisible){
+                      dot.setAttribute("data-visible", "false")
+                      dot.style.animation = "none"
+                      gsap.to(dot,{opacity:0, duration:0.3, overwrite: "auto" })
+                      
+                    }
+                    
+                  }
+
+                })
+
+              }
+            }
+          }
+
+        )
 
 
   }else{

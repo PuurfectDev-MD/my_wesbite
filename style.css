@@ -123,7 +123,7 @@
         filter: blur(10px);
     }
     60%{
-        filter: blur(0px);
+        filter: blur(15px);
         opacity: 1;
     }
     100%{
@@ -137,6 +137,6 @@
 
 .attentionDot{
     transform-origin: center;
-    animation: scaleAndBlur 1s infinite ease-in-out;
+    animation: none 1s infinite ease-in-out;
     will-change: transform , opacity, filter;
 }
