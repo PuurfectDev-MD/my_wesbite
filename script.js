@@ -5,7 +5,6 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { SplitText } from "gsap/SplitText";
 import { ScrambleTextPlugin } from "gsap/ScrambleTextPlugin";
-import { info } from 'autoprefixer';
 gsap.registerPlugin(ScrollTrigger)
 
 gsap.set(".been_svg_item path", {visibility:"visible"})
@@ -132,10 +131,10 @@ projectGrid.innerHTML = search_display.join('')
 const cardElements = []
 gsap.registerPlugin(SplitText);
 gsap.registerPlugin(ScrambleTextPlugin)
- gsap.set(".hero_text", {visibility:"visible"})
-  gsap.set(".second_text", {visibility:"visible"})
+gsap.set(".hero_text", {visibility:"visible"})  //only sets them visible when the js file loads for smooth effect
+gsap.set(".second_text", {visibility:"visible"})
 
-document.fonts.ready.then(() => {
+document.fonts.ready.then(() => {  //for the scroll text 
     gsap.to(".second_text", {
     duration: 1, 
     scrambleText: {
@@ -147,12 +146,12 @@ document.fonts.ready.then(() => {
     })
 
 
-    let split= SplitText.create(".hero_text",{
+    let split= SplitText.create(".hero_text",{  //split text animation for the main text
     type: "chars, words",
     wordsClass: "word++",
     } )
 
-    gsap.from(split.chars,{
+    gsap.from(split.chars,{   
     yPercent: "random([100,100])",
     rotation: "random(-30,30)",
     ease: "back.out",
@@ -176,28 +175,29 @@ if (been_placeholder){
   console.log("Beeninfo placeholder found")
   const parser = new DOMParser();
   beenInfo.forEach((been) =>{
-    const beenDisplay = ` <div class= "w-screen z-10 bg-amber-600">
-        <h1 class=" font-bold font-pixelify_bold text-4xl pl-10">Been ${been.connecter}</h1>
-        <div class="grid grid-cols-2">
-            <div class= " p-[10%]">
-                  <h2 class="">${been.title}</h2>
-                    <p>${been.description}</p>
-                    <p>${been.date}</p>
-            </div>
-            <div>
-                <img src="${been.photos[0]}" class= "w-[30%] h-[60%]">
-                 <img src="${been.photos[1]}" class= "w-[30%] h-[60%]">
-
-
-            </div>
-      
-        </div>
-
-    </div>`.trim()
+    const beenDisplay = `<div class="been-card w-full h-full fixed inset-0 flex items-center justify-center pointer-events-none">
+                <div class="bg-amber-600 p-10 rounded-xl shadow-2xl pointer-events-auto" style="width: 80%; max-width: 800px;">
+                    <h1 class="font-bold font-pixelify_bold text-4xl">Been ${been.connecter}</h1>
+                    <div class="grid grid-cols-2 gap-8">
+                        <div>
+                            <h2>${been.title}</h2>
+                            <p>${been.description}</p>
+                            <p>${been.date}</p>
+                        </div>
+                        <div class="flex gap-2">
+                            <img src="${been.photos[0]}" class="w-1/2 h-auto object-cover">
+                            <img src="${been.photos[1]}" class="w-1/2 h-auto object-cover">
+                        </div>
+                    </div>
+                </div>
+            </div>`.trim()
 
         const doc = parser.parseFromString(beenDisplay, 'text/html')
         const cardNode = doc.body.firstChild
-        gsap.set(cardNode, {opacity:0, y:30})
+        gsap.set(cardNode, {
+          opacity:0,
+           y:30,
+          })
         cardElements.push(cardNode)
         been_placeholder.appendChild(cardNode);
   })
@@ -224,10 +224,7 @@ if (been_placeholder){
 
         while (attempts <maxattempts && placedDots <beenAtcount){
           attempts ++
-          const minRange = restrictedLength + (placedDots*segmentLegnth)
-
-          const randomWithinSegment = Math.random()* segmentLegnth
-          const randomPointPlace = minRange + randomWithinSegment
+          const randomPointPlace =restrictedLength + (placedDots*segmentLegnth) 
           const Cardpoint = path.getPointAtLength(randomPointPlace)
 
           const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle")
@@ -244,7 +241,14 @@ if (been_placeholder){
           circle.classList.add("attentionDot")
           
           been_svg_item.querySelector("svg").appendChild(circle)
-          placedDots ++
+        
+          const currentCard = cardElements[placedDots]
+
+          gsap.set(currentCard, {
+            y: Cardpoint.y
+          })
+
+            placedDots ++
 
 
         }
@@ -279,13 +283,27 @@ if (been_placeholder){
 
                   
 
-                  if (currentlengthDrawn >= dotDistance){
-                    if(!dotVisible){
+                  if (currentlengthDrawn >= dotDistance){  // this compares the dot distance for all dots to see if its passed the stroke
+                    if(!dotVisible){  // if the dot is farther from the stroke and is notvisbile then turns on visibiltity
                       dot.setAttribute("data-visible","true")
                       gsap.to(dot, {opacity:1, duration: 0.3,overwrite: "auto"})
-                      dot.style.animation = "scaleAndBlur 2s infinite ease-in-out";
+                      dot.style.animation = "scaleAndBlur 2s infinite ease-in-out";  // for the dot blinking
 
-                      gsap.to(targetElement,{
+
+                      cardElements.forEach((card, idx) =>{ //loops through all the cards with idx as index
+                        if(idx!= cardIndex){ // slects only the one that is not the current becasue current one should be visible
+                          gsap.to(card, { 
+                            opacity: 0, 
+                            y: -20, 
+                            duration: 0.4, 
+                            pointerEvents: "none",
+                            overwrite: "auto" ,
+
+                        });
+                        }
+                      })
+
+                      gsap.to(targetElement,{  
                         opacity:1,
                         overwrite: "auto",
                         duration: 0.8,
@@ -295,11 +313,12 @@ if (been_placeholder){
                       
                     }
                     
-                  }else{
+                  }else{  // if the dots are up the stroke as in at a distance less than stroke then it hides it 
                     if (dotVisible){
                       dot.setAttribute("data-visible", "false")
                       dot.style.animation = "none"
                       gsap.to(dot,{opacity:0, duration:0.3, overwrite: "auto" })
+
 
                       gsap.to(targetElement,{
                         opacity:0,
