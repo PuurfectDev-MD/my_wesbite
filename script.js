@@ -175,8 +175,8 @@ if (been_placeholder){
   console.log("Beeninfo placeholder found")
   const parser = new DOMParser();
   beenInfo.forEach((been) =>{
-    const beenDisplay = `<div class="been-card w-full h-full fixed inset-0 flex items-center justify-center pointer-events-none">
-                <div class="bg-amber-600 p-10 rounded-xl shadow-2xl pointer-events-auto" style="width: 80%; max-width: 800px;">
+    const beenDisplay = `<div class="been-card w-full h-full fixed inset-0 flex items-center justify-center pointer-events-none ">
+                <div class="glowXl bg-been_card_background p-10 rounded-2xl pointer-events-auto border-4 text-black" style="width: 80%; max-width: 800px;">
                     <h1 class="font-bold font-pixelify_bold text-4xl">Been ${been.connecter}</h1>
                     <div class="grid grid-cols-2 gap-8">
                         <div>
@@ -206,9 +206,6 @@ if (been_placeholder){
   const path = been_svg_item.querySelector("path")
   
   if (path){
-
-      // const content_height = (been_placeholder.scrollHeight) + 450
-      // been_svg_item.style.height = content_height + "px"
       console.log("Height set for svg")
       const pathLength = path.getTotalLength()
       console.log(pathLength)

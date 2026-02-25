@@ -7,16 +7,16 @@
     /* defining default theme constrains */
     --color-page-bg: oklch(98.2% 0.018 155.826); /* green-50 background */
     --color-primary-text: oklch(13% 0.028 261.692);/* black*/
-
+    
+            /* for search  */
     --color-card-border: oklch(92.5% 0.084 155.995); /* green 200*/
     --color-card-hover: oklch(96.2% 0.044 156.743); /*green 100*/
     --color-card-background: oklch(97.7% 0.013 236.62); /*sky 50*/
     --color-card-text: oklch(13% 0.028 261.692);
 
-    --color-strokecolor_line:oklch(76.9% 0.188 70.08);
+    --color-strokecolor_line:oklch(79.2% 0.209 151.711);
     
-    
-
+    --color-been_card_background:oklch(90.5% 0.093 164.15);
 
     --font-pixelify_bold: "Pixelify_Sans",san-serif;
     --font-doto_semibold : "Doto", san-serif;
@@ -31,15 +31,15 @@
         --color-page-bg: oklch(21% 0.006 285.885);
         --color-primary-text: oklch(98.5% 0 0); /* white*/
 
-            
+            /* for search  */
         --color-card-border: oklch(92% 0.004 286.32); /* zinc 200*/
         --color-card-hover: oklch(86.285% 0.08163 118.683); /*green 100*/
         --color-card-background: oklab(100% 0 -0.00011);
         --color-card-text: oklch(100% 0.00011 271.152);
 
-        --color-strokecolor_line:oklch(69.6% 0.17 162.48);
-        
 
+        --color-strokecolor_line:oklch(83.7% 0.128 66.29);
+         --color-been_card_background:oklch(92.4% 0.12 95.746);
     }
   
 }
@@ -50,6 +50,14 @@
     }
     .dark .dark\:glow{
         @apply shadow-[0_0_20px_rgba(251,191,36,0.8)] scale-105;
+    }
+    
+    .glowXl{
+        @apply shadow-[0_0_200px_5px_rgba(57,57,57,0.8)];
+    }
+
+    .dark .glowXl{
+        @apply shadow-[0_0_40px_5px_rgba(221,238,226,0.8)];
     }
 }
 
@@ -153,8 +161,12 @@
 }
 
 .word3{
-    color: brown;
+    color: oklch(76.5% 0.177 163.223);
     font-style: italic;
     padding-left: 4px;
     padding-right: 8px;
+
+    :where(.dark) &{
+        color: oklch(76.9% 0.188 70.08);
+    }
 }
