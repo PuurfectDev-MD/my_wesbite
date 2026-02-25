@@ -176,19 +176,31 @@ if (been_placeholder){
   const parser = new DOMParser();
   beenInfo.forEach((been) =>{
     const beenDisplay = `<div class="been-card w-full h-full fixed inset-0 flex items-center justify-center pointer-events-none ">
-                <div class="glowXl bg-been_card_background p-10 rounded-2xl pointer-events-auto border-4 text-black" style="width: 80%; max-width: 800px;">
+                <div class="glowXl bg-been_card_background p-10 rounded-2xl pointer-events-auto border-been_border_card text-been_text_card" style="width: 80%; max-width: 800px;">
                     <h1 class="font-bold font-pixelify_bold text-4xl">Been ${been.connecter}</h1>
                     <div class="grid grid-cols-2 gap-8">
                         <div>
-                            <h2>${been.title}</h2>
-                            <p>${been.description}</p>
+                            <h2 class="mt-5">${been.title}</h2>
+                            <p class= "mt-2">${been.description}</p>
                             <p>${been.date}</p>
                         </div>
                         <div class="flex gap-2">
                             <img src="${been.photos[0]}" class="w-1/2 h-auto object-cover">
                             <img src="${been.photos[1]}" class="w-1/2 h-auto object-cover">
                         </div>
-                    </div>
+                          <div>
+                             <p>${been.comments}</p>
+                           </div>
+
+                            
+                           <video class="relative right-0 pointer-events-auto" width="640", height= "auto" controls>
+                                   <source src="${been.video}" type="video/mp4">
+                           </video>
+                      
+                        <div class= "grid grid-cols-2 gap-8 ">
+                        
+                        
+                      
                 </div>
             </div>`.trim()
 

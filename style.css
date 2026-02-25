@@ -14,14 +14,17 @@
     --color-card-background: oklch(97.7% 0.013 236.62); /*sky 50*/
     --color-card-text: oklch(13% 0.028 261.692);
 
+ /* been page */
     --color-strokecolor_line:oklch(79.2% 0.209 151.711);
-    
-    --color-been_card_background:oklch(90.5% 0.093 164.15);
+    --color-been_card_background:rgba(255, 200, 100, 0.08);
+    --color-been_border_card:rgba(255,165,0,0.3);
+    --color-been_text_card: black;
 
     --font-pixelify_bold: "Pixelify_Sans",san-serif;
     --font-doto_semibold : "Doto", san-serif;
     --font-bitcountGridDouble_medium: "Bitcount_Grid_Double", san-serif;
     --font-schoolbell: "Schoolbell",san-serif;
+
 
 }
 
@@ -38,8 +41,11 @@
         --color-card-text: oklch(100% 0.00011 271.152);
 
 
-        --color-strokecolor_line:oklch(83.7% 0.128 66.29);
-         --color-been_card_background:oklch(92.4% 0.12 95.746);
+        --color-strokecolor_line:oklch(72% 0.18 66.29);
+
+        --color-been_card_background:rgba(51, 51, 51, 0.08);
+        --color-been_border_card:1px solid rgba(255, 165, 0, 0.2);
+        --color-been_text_card: oklch(95.3% 0.051 180.801);
     }
   
 }
@@ -53,11 +59,15 @@
     }
     
     .glowXl{
+        backdrop-filter: blur(12px);
         @apply shadow-[0_0_200px_5px_rgba(57,57,57,0.8)];
+       
     }
 
     .dark .glowXl{
-        @apply shadow-[0_0_40px_5px_rgba(221,238,226,0.8)];
+         backdrop-filter: blur(12px);
+        @apply shadow-[0_0_30px_rgba(81,75,78,0.8)];
+        
     }
 }
 
