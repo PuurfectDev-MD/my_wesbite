@@ -1,5 +1,5 @@
 export function setupNavbar() {
-    const navHTML = ` <nav class="realtive flex items-center justify-center p-10 w-full">
+    const navHTML = ` <nav class="relative flex items-center justify-center p-10 w-full z-50 pointer-events-auto">
         <ul class = "flex flex-col md:flex-row justify-center gap-x-[4%] font-doto_semibold " >
             <li ><a class= "inline-block px-10 lg:px-3 py-2 px-3 lg:text-[30px] text-[30px]  md:text-[24px] md:px-1 font-extrabold rounded-lg hover:bg-teal-100 hover:text-black hover:scale-110 transform transition duration-200"  href="/index.html">Home</a></li>
             <hr class= "lg:hidden md:hidden ">

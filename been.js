@@ -29,7 +29,7 @@ export const beenInfo = [
         comments:"Got all gold medals (total 3!!!) for all the competiton - game/speech/ar and vr experience devlopment",
         location: "UAE, Dubai",
         date: "2024",
-        photos: [],
+        photos: ["/assets/images/been/Techtos.webp"],
         video: null,
         resources: ["https://drive.google.com/file/d/1nJemglsXH5-fLXxxavT8RwRKPnB2NSnw/view?usp=drive_link"]
     },
@@ -47,7 +47,7 @@ export const beenInfo = [
         connecter: "at",
         title: "Gulf Medical University Tech Exhibition",
         description: "Exibition for schools all over the UAE",
-        comments:"Had a pretty good prototype and got recognition too. But had to leave early from the event cause school didnt let us :( ",
+        comments:"We made a autonomous pharmaceutical delivery robot. Had a pretty good prototype and got recognition too. But had to leave early from the event cause school didnt let us :( ",
         location: "UAE, Dubai",
         date: "2025",
         photos: ["/assets/images/been/Gmu1.webp", "/assets/images/been/Gmu2.webp"],
@@ -59,10 +59,10 @@ export const beenInfo = [
         connecter: "in",
         title: "NASA SPACE APP Challenge",
         description: "App/Web dev challenge for people all around the globe",
-        comments:"This was just all so messed up. No plan no proper team. No expertise. Just got me to get back to web dev after that pathetic attempt 😭 ",
+        comments:"I was just bored so tried it with 0 app building experience. It was just all so messed up. No plan no proper team. No expertise. Just got me to get back to web dev after that pathetic attempt 😭. Got out the first round 💔 ",
         location: "Virtual",
         date: "2024",
-        photos: [],
+        photos: ["/assets/images/been/nasa_1.webp"],
         video: "/assets/images/been/space_app.demo.mp4",
         resources: ["https://github.com/PuurfectDev-MD/NASA-SPACE-APP"]
 
@@ -70,11 +70,11 @@ export const beenInfo = [
     {
         connecter: "in",
         title: "Blueprint x AMD",
-        description: "HackClub's teenage funding program for porjects",
-        comments:"This was super fun. Got me into kicad and fusion 360. Blueprint really helped me get back in track of being productive and doing something meaningful",
+        description: "HackClub's teenage funding program for projects",
+        comments:"This was super fun. Got me into kicad and fusion 360. Blueprint really helped me get back in track of being productive and doing something meaningful.",
         location: "Virtual",
         date: "2026",
-        photos: ["x", "y"],
+        photos: ["/assets/images/been/blueprint_img1.webp", "/assets/images/been/blueprint_img2.webp"],
         video: null
 
     }
